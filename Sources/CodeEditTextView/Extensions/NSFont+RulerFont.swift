@@ -15,7 +15,12 @@ extension STTextViewController {
         let fontWeight = NSFont.Weight(rawValue: font.pointSize * 0.00001 + 0.0001)
         let fontWidth = NSFont.Width(rawValue: -0.13)
 
-        let font = NSFont.systemFont(ofSize: fontSize, weight: fontWeight, width: fontWidth)
+        let font: NSFont
+        if #available(macOS 13.0, *) {
+            font = NSFont.systemFont(ofSize: fontSize, weight: fontWeight, width: fontWidth)
+        } else {
+            font = NSFont.systemFont(ofSize: fontSize, weight: fontWeight)
+        }
 
         /// Set the open four
         let alt4: [NSFontDescriptor.FeatureKey: Int] = [
